@@ -13,6 +13,6 @@ Since Github APIs to fetch the open issues of any github repository, was resulti
 I have used the NPM package Octonode to achieve this. Octonode is a library for nodejs to access the github v3 api.
 
 Given more time I would have done the following:
-  1.Improve UI like 
-  2.Adding loader
-  3.Used material themes and Vuetify elements.
+1.Improve UI. 
+2.Adding loader.
+3.Used material themes and Vuetify elements.
