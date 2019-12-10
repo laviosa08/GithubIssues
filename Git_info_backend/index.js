@@ -1,3 +1,4 @@
+//Import required packages
 var express 	= require('express');
 var port 		= process.env.PORT || 3000;
 var bodyParser 	= require('body-parser');
@@ -6,6 +7,7 @@ var cors 		= require('cors');
 
 const app 		= express()
 
+//To allow cross origin resource sharing
 app.use(cors());
 
 app.use(bodyParser.urlencoded({
@@ -13,13 +15,14 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-
+//API to get Github issues count 
 app.post('/', function (req, res) {
 	var repoUrl = req.body.repoUrl;
 	repoUrl = repoUrl.split('com/')[1]
 	var client = github.client();
   	var repo = client.repo(repoUrl);
  
+ 	//function to paginate and fetch all git open issues
   	async function getissues () {
   		var total 			= 0;
 	  	var within24Hours 	= 0;

@@ -1,3 +1,4 @@
+<!-- Vue app Html template  -->
 <template>
   <div id="app">
     <div >
@@ -39,15 +40,16 @@ export default {
   name: 'app',
   data () {
     return {
-      repoUrl:'',
-      totalIssues:"--",
-      within24Hours:"--",
-      within7Days:"--",
-      above7Days:"--",
+      repoUrl :       '',
+      totalIssues :   "--",
+      within24Hours : "--",
+      within7Days :   "--",
+      above7Days :    "--",
       error:0
     }
   },
   methods:{
+    //function to submit url and get the required git repo issue count
     Submit:function(){
       console.log("hi");
       console.log(this.repoUrl);
@@ -55,18 +57,21 @@ export default {
       const axios = require('axios');
       var vm = this;
 
-      axios.post('http://localhost:3000/',{
+      axios.post('https://git-issues-backend.herokuapp.com/',{
         repoUrl:this.repoUrl
       })
       .then(function (response) {
-        console.log(response);
         if(response.data.statusCode==404){
           vm.error = 1;
           vm.$toaster.error('Please Enter a Valid URL');
+          vm.totalIssues = "--"
+          vm.within24Hours = "--"
+          vm.within7Days = "--"
+          vm.above7Days = "--"
+          vm.repoUrl = ""
         }
         // handle success
         else{
-          console.log(response.data[0].total);
           vm.totalIssues = ""+response.data[0].total
           vm.within24Hours = ""+response.data[0].within24Hours
           vm.within7Days = ""+response.data[0].within7Days
